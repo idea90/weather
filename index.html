@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            overflow: hidden;
+            animation: backgroundAnimation 60s linear infinite;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(30px);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
+        }
+        .weather-info {
+            margin-top: 20px;
+        }
+        .icon {
+            font-size: 6rem;
+            margin-bottom: 15px;
+            animation: iconAnimation 1.5s ease-in-out infinite;
+        }
+        .temp {
+            font-size: 5rem;
+            font-weight: 800;
+            color: white;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+        .description {
+            font-size: 1.4rem;
+            color: white;
+            margin-top: 10px;
+            text-transform: capitalize;
+            opacity: 0.9;
+        }
+        .additional-info {
+            font-size: 1.2rem;
+            color: white;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        .input-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        input {
+            padding: 12px;
+            font-size: 1.4rem;
+            border-radius: 10px;
+            border: none;
+            width: 70%;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.5);
+        }
+        button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #00b4d8, #0077b6); }
+            50% { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+            100% { background: linear-gradient(135deg, #00b4d8, #0077b6); }
+        }
+        @keyframes iconAnimation {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            .temp {
+                font-size: 4.5rem;
+            }
+            .description {
+                font-size: 1.3rem;
+            }
+            .additional-info {
+                font-size: 1rem;
+            }
+            .icon {
+                font-size: 5rem;
+            }
+            input {
+                font-size: 1.3rem;
+                padding: 10px;
+            }
+            button {
+                font-size: 1rem;
+                padding: 10px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            .temp {
+                font-size: 4rem;
+            }
+            .description {
+                font-size: 1.1rem;
+            }
+            .additional-info {
+                font-size: 0.9rem;
+            }
+            .icon {
+                font-size: 4rem;
+            }
+            input {
+                font-size: 1.2rem;
+                padding: 8px;
+            }
+            button {
+                font-size: 0.9rem;
+                padding: 8px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="weather-info">
+            <div id="icon" class="icon">
+                <i class="fas fa-cloud-sun"></i>
+            </div>
+            <div id="temp" class="temp">--°C</div>
+            <div id="description" class="description">Loading...</div>
+            <div id="humidity" class="additional-info">Humidity: --%</div>
+            <div id="wind" class="additional-info">Wind Speed: -- m/s</div>
+        </div>
+        <div class="input-container">
+            <input id="city" type="text" placeholder="Enter city" />
+            <button onclick="getWeather()">Get Weather</button>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = 'YOUR_API_KEY';
+
+        async function getWeather() {
+            const city = document.getElementById('city').value;
+            if (!city) {
+                alert('Please enter a city');
+                return;
+            }
+
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+            const data = await response.json();
+
+            if (data.cod === '404') {
+                alert('City not found');
+                return;
+            }
+
+            const iconCode = data.weather[0].icon;
+            const icon = `http://openweathermap.org/img/wn/${iconCode}.png`;
+            const description = data.weather[0].description;
+            const temp = Math.round(data.main.temp);
+            const humidity = data.main.humidity;
+            const windSpeed = data.wind.speed;
+
+            // Fade out weather info before updating
+            document.getElementById('temp').style.opacity = '0';
+            document.getElementById('description').style.opacity = '0';
+            document.getElementById('humidity').style.opacity = '0';
+            document.getElementById('wind').style.opacity = '0';
+
+            setTimeout(() => {
+                // Update the icon
+                document.getElementById('icon').innerHTML = `<img src="${icon}" alt="weather icon" />`;
+                // Update temperature, description, humidity, and wind speed
+                document.getElementById('temp').innerText = `${temp}°C`;
+                document.getElementById('description').innerText = description.charAt(0).toUpperCase() + description.slice(1);
+                document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
+                document.getElementById('wind').innerText = `Wind Speed: ${windSpeed} m/s`;
+
+                // Fade in weather info
+                document.getElementById('temp').style.opacity = '1';
+                document.getElementById('description').style.opacity = '1';
+                document.getElementById('humidity').style.opacity = '1';
+                document.getElementById('wind').style.opacity = '1';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
