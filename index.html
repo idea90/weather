@@ -7,11 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             display: flex;
@@ -33,38 +29,11 @@
             max-width: 400px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
-        }
-        .weather-info {
-            margin-top: 20px;
-        }
-        .icon {
-            font-size: 6rem;
-            margin-bottom: 15px;
-            animation: iconAnimation 1.5s ease-in-out infinite;
-        }
-        .temp {
-            font-size: 5rem;
-            font-weight: 800;
-            color: white;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
-        .description {
-            font-size: 1.4rem;
-            color: white;
-            margin-top: 10px;
-            text-transform: capitalize;
-            opacity: 0.9;
-        }
-        .additional-info {
-            font-size: 1.2rem;
-            color: white;
-            margin-top: 10px;
-            opacity: 0.8;
-        }
+        .container:hover { transform: scale(1.05); box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5); }
+        .icon { font-size: 4rem; margin-bottom: 10px; color: white; }
+        .temp { font-size: 3.5rem; font-weight: 800; color: white; margin-top: 10px; letter-spacing: 1px; }
+        .description { font-size: 1.4rem; color: white; margin-top: 10px; text-transform: capitalize; opacity: 0.9; }
+        .additional-info { font-size: 1.2rem; color: white; margin-top: 10px; opacity: 0.8; }
         .input-container {
             margin-top: 30px;
             display: flex;
@@ -72,26 +41,16 @@
             align-items: center;
             gap: 15px;
         }
-        input {
+        input, button {
             padding: 12px;
-            font-size: 1.4rem;
+            font-size: 1rem;
             border-radius: 10px;
             border: none;
             width: 70%;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
             transition: all 0.3s ease;
-        }
-        input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.5);
         }
         button {
             padding: 12px 28px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
             font-weight: 700;
             background: linear-gradient(45deg, #00c6ff, #0072ff);
             color: white;
@@ -100,147 +59,126 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
         }
-        button:hover {
-            background: linear-gradient(45deg, #0072ff, #00c6ff);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        .forecast-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .day { display: flex; flex-direction: column; align-items: center; color: white; width: 70px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.2); }
+        .day h3 { font-size: 1rem; margin-bottom: 5px; }
+        .day i { font-size: 2rem; }
+        .toggle {
+            margin-top: 20px;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px;
+            font-weight: 600;
+            background: #0072ff;
+            border-radius: 10px;
+            transition: background 0.3s ease;
         }
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        @keyframes backgroundAnimation {
-            0% { background: linear-gradient(135deg, #00b4d8, #0077b6); }
-            50% { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
-            100% { background: linear-gradient(135deg, #00b4d8, #0077b6); }
-        }
-        @keyframes iconAnimation {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-            }
-            .temp {
-                font-size: 4.5rem;
-            }
-            .description {
-                font-size: 1.3rem;
-            }
-            .additional-info {
-                font-size: 1rem;
-            }
-            .icon {
-                font-size: 5rem;
-            }
-            input {
-                font-size: 1.3rem;
-                padding: 10px;
-            }
-            button {
-                font-size: 1rem;
-                padding: 10px 24px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
-            .temp {
-                font-size: 4rem;
-            }
-            .description {
-                font-size: 1.1rem;
-            }
-            .additional-info {
-                font-size: 0.9rem;
-            }
-            .icon {
-                font-size: 4rem;
-            }
-            input {
-                font-size: 1.2rem;
-                padding: 8px;
-            }
-            button {
-                font-size: 0.9rem;
-                padding: 8px 20px;
-            }
-        }
+        .toggle:hover { background: #005ecb; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="weather-info">
-            <div id="icon" class="icon">
-                <i class="fas fa-cloud-sun"></i>
-            </div>
+        <div id="current-weather" class="weather-info">
+            <div id="icon" class="icon"><i class="fas fa-cloud-sun"></i></div>
             <div id="temp" class="temp">--°C</div>
             <div id="description" class="description">Loading...</div>
             <div id="humidity" class="additional-info">Humidity: --%</div>
             <div id="wind" class="additional-info">Wind Speed: -- m/s</div>
         </div>
+
+        <div id="forecast-container" class="forecast-container" style="display: none;"></div>
+
         <div class="input-container">
             <input id="city" type="text" placeholder="Enter city" />
             <button onclick="getWeather()">Get Weather</button>
         </div>
+        <div class="toggle" onclick="toggleView()">View 7-Day Forecast</div>
     </div>
 
     <script>
         const apiKey = '8cd8174ec75638397cf97b7ce34b0ad3';
+        let isCurrentWeather = true;
 
         async function getWeather() {
             const city = document.getElementById('city').value;
-            if (!city) {
-                alert('Please enter a city');
-                return;
-            }
+            if (!city) { alert('Please enter a city'); return; }
 
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
             const data = await response.json();
 
-            if (data.cod === '404') {
-                alert('City not found');
-                return;
-            }
+            if (data.cod === '404') { alert('City not found'); return; }
 
-            const iconCode = data.weather[0].icon;
-            const icon = `http://openweathermap.org/img/wn/${iconCode}.png`;
-            const description = data.weather[0].description;
+            const { main, description } = data.weather[0];
             const temp = Math.round(data.main.temp);
             const humidity = data.main.humidity;
             const windSpeed = data.wind.speed;
 
-            // Fade out weather info before updating
-            document.getElementById('temp').style.opacity = '0';
-            document.getElementById('description').style.opacity = '0';
-            document.getElementById('humidity').style.opacity = '0';
-            document.getElementById('wind').style.opacity = '0';
+            document.getElementById('icon').innerHTML = getWeatherIcon(main);
+            document.getElementById('temp').innerText = `${temp}°C`;
+            document.getElementById('description').innerText = description;
+            document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
+            document.getElementById('wind').innerText = `Wind Speed: ${windSpeed} m/s`;
 
-            setTimeout(() => {
-                // Update the icon
-                document.getElementById('icon').innerHTML = `<img src="${icon}" alt="weather icon" />`;
-                // Update temperature, description, humidity, and wind speed
-                document.getElementById('temp').innerText = `${temp}°C`;
-                document.getElementById('description').innerText = description.charAt(0).toUpperCase() + description.slice(1);
-                document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
-                document.getElementById('wind').innerText = `Wind Speed: ${windSpeed} m/s`;
+            getForecast(data.coord.lat, data.coord.lon);
+        }
 
-                // Fade in weather info
-                document.getElementById('temp').style.opacity = '1';
-                document.getElementById('description').style.opacity = '1';
-                document.getElementById('humidity').style.opacity = '1';
-                document.getElementById('wind').style.opacity = '1';
-            }, 300);
+        async function getForecast(lat, lon) {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`);
+            const data = await response.json();
+
+            const forecastContainer = document.getElementById('forecast-container');
+            forecastContainer.innerHTML = '';
+
+            data.daily.slice(0, 7).forEach((day, index) => {
+                const date = new Date(day.dt * 1000);
+                const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+                const temp = Math.round(day.temp.day);
+                const weatherMain = day.weather[0].main;
+
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day';
+                dayDiv.innerHTML = `
+                    <h3>${dayName}</h3>
+                    <i class="${getWeatherIconClass(weatherMain)}"></i>
+                    <div>${temp}°C</div>
+                `;
+                forecastContainer.appendChild(dayDiv);
+            });
+        }
+
+        function toggleView() {
+            const currentWeatherDiv = document.getElementById('current-weather');
+            const forecastContainer = document.getElementById('forecast-container');
+            const toggleButton = document.querySelector('.toggle');
+
+            if (isCurrentWeather) {
+                currentWeatherDiv.style.display = 'none';
+                forecastContainer.style.display = 'flex';
+                toggleButton.innerText = 'View Current Weather';
+            } else {
+                currentWeatherDiv.style.display = 'block';
+                forecastContainer.style.display = 'none';
+                toggleButton.innerText = 'View 7-Day Forecast';
+            }
+
+            isCurrentWeather = !isCurrentWeather;
+        }
+
+        function getWeatherIcon(main) {
+            const icons = {
+                Clear: 'fas fa-sun',
+                Clouds: 'fas fa-cloud',
+                Rain: 'fas fa-cloud-showers-heavy',
+                Drizzle: 'fas fa-cloud-rain',
+                Thunderstorm: 'fas fa-bolt',
+                Snow: 'fas fa-snowflake',
+                Mist: 'fas fa-smog'
+            };
+            return `<i class="${icons[main] || 'fas fa-question'}"></i>`;
+        }
+
+        function getWeatherIconClass(main) {
+            return getWeatherIcon(main).match(/class="(.*?)"/)[1];
         }
     </script>
 </body>
